@@ -28,4 +28,5 @@ public class ApiConstant {
 	public static final Integer NO_CONTENT_CODE = 204;
 
 	public static final Float PERCENTAGE_DIVIDE_VALUE = 100.0f;
+	public static final String REGISTERED_SUCCESS = "Registered Successfully";
 }

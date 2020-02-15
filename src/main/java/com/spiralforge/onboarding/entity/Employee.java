@@ -1,9 +1,13 @@
 package com.spiralforge.onboarding.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -21,4 +25,11 @@ public class Employee {
 	private String emailId;
 	private Long mobileNumber;
 	private String employeeStatus;
+	private String designation;
+	private String employeeBand;
+	private LocalDate dateOfJoining;
+	
+	@OneToOne
+	@JoinColumn(name = "salary_id")
+	private Salary salary;
 }

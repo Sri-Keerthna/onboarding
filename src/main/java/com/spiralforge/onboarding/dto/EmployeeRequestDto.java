@@ -26,11 +26,3 @@ public class EmployeeRequestDto {
 	private String employeeBand;
 }
 
-{
-	  "designation": "Software Engineer",
-	  "emailId": "sri@gmail.com",
-	  "employeeBand": "E1",
-	  "firstName": "Sri",
-	  "lastName": "Keerthna",
-	  "mobileNumber": 9458345783
-	}

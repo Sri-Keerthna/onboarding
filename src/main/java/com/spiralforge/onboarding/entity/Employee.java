@@ -21,4 +21,5 @@ public class Employee {
 	private String emailId;
 	private Long mobileNumber;
 	private String employeeStatus;
+	private String designation;
 }

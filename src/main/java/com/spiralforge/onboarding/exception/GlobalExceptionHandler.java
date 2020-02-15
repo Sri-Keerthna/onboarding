@@ -3,6 +3,7 @@ package com.spiralforge.onboarding.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.spiralforge.onboarding.constants.ApiConstant;
+import com.spiralforge.onboarding.dto.ErrorDto;
 import com.spiralforge.onboarding.dto.ExceptionResponseDto;
 
 @ControllerAdvice
@@ -77,18 +79,20 @@ public class GlobalExceptionHandler {
 		return new ExceptionResponseDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
 	}
 
-	/**
-	 * @description Handle all validation Exception
-	 *
-	 * @param exception
-	 * @return ExceptionResponseDto
-	 */
-	@ExceptionHandler(UserNotFoundException.class)
-	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	@ResponseBody
-	public final ExceptionResponseDto handleValidationFailedException(UserNotFoundException exception) {
-		String defaultMessage = exception.getMessage();
-		return new ExceptionResponseDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<ErrorDto> adminNotFoundException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.ADMIN_NOTFOUND_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
+	}
+
+	@ExceptionHandler(EmployeeListException.class)
+	public ResponseEntity<ErrorDto> employeeListException() {
+		ErrorDto errorDto = new ErrorDto();
+		errorDto.setMessage(ApiConstant.LIST_EMPTY_MESSAGE);
+		errorDto.setStatusCode(ApiConstant.FAILURE_CODE);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDto);
 	}
 
 }

@@ -8,5 +8,6 @@ import com.spiralforge.onboarding.entity.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long> {
 
+	Admin findByMobileNumberAndPassword(Long mobileNumber, String password);
 
 }

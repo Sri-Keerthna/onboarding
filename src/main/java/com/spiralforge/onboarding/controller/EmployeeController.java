@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spiralforge.onboarding.dto.EmployeeRequestDto;
 import com.spiralforge.onboarding.dto.EmployeeResponseDto;
+import com.spiralforge.onboarding.dto.TimeSheetResponseDto;
 import com.spiralforge.onboarding.exception.DesignationNotFoundException;
 import com.spiralforge.onboarding.service.EmployeeService;
 
@@ -35,5 +38,11 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeResponseDto> addEmployee(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) throws DesignationNotFoundException{
 		EmployeeResponseDto employeeResponseDto=employeeService.addEmployee(employeeRequestDto);
 		return new ResponseEntity<> (employeeResponseDto, HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<TimeSheetResponseDto> timesheetEmployee() {
+		TimeSheetResponseDto timeSheetResponseDto=employeeService.timesheetEmployee();
+		return new ResponseEntity<> (timeSheetResponseDto, HttpStatus.OK);
 	}
 }

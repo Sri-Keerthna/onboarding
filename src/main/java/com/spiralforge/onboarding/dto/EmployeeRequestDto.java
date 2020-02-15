@@ -22,3 +22,7 @@ public class EmployeeRequestDto {
 	@Size(min = 2, max = 20, message = "Enter a valid employee band")
 	private String employeeBand;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 61376f6514417c806555eb45217f989bd848b34e

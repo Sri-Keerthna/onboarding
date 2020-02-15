@@ -104,7 +104,12 @@ public class AdminServiceImpl implements AdminService {
 	public String updateEmployee(Long sapId) {
 		Optional<Employee> employee = employeeRepository.findById(sapId);
 		if (!(employee.isPresent())) {
+			logger.info(ApiConstant.EMPLOYEE_NOTFOUND_MESSAGE);
 			return ApiConstant.EMPLOYEE_NOTFOUND_MESSAGE;
+		}
+		if (employee.get().getEmployeeStatus().equalsIgnoreCase(ApplicationConstants.SUCCESS_STATUS)) {
+			logger.info(ApiConstant.ALREADY_UPDATED_MESSAGE);
+			return ApiConstant.ALREADY_UPDATED_MESSAGE;
 		}
 		employee.get().setEmployeeStatus(ApplicationConstants.SUCCESS_STATUS);
 		employeeRepository.save(employee.get());

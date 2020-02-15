@@ -29,6 +29,7 @@ public class ApiConstant {
 
 	public static final String LIST_SUCCESS_MESSAGE = "The list of employees with status pending is displayed";
 	public static final String LIST_EMPTY_MESSAGE = "There are no employees currently with status pending";
-	public static final String EMPTY_CUSTOMERINPUT_MESSAGE = "Field can't be left blank";;
+	public static final String EMPTY_CUSTOMERINPUT_MESSAGE = "Field can't be left blank";
+	public static final String ALREADY_UPDATED_MESSAGE = "Detail is already updated";
 
 }

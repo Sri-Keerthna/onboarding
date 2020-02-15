@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class EmployeeList {
 	private Long sapId;
-	private String employeeName;
+	private String firstName;
+	private String lastName;
+	private String employeeBand;
 	private String designation;
 }

@@ -98,6 +98,7 @@ public class AdminController {
 	@PutMapping("/{sapId}")
 	public ResponseEntity<String> updateEmployee(@PathVariable(value = "sapId") Long sapId) {
 		String response = adminService.updateEmployee(sapId);
+		logger.info(response);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }

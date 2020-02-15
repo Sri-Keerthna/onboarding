@@ -1,9 +1,6 @@
 package com.spiralforge.onboarding.dto;
 
-import java.time.LocalDate;
-
 import javax.validation.constraints.Email;
-import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -25,12 +22,3 @@ public class EmployeeRequestDto {
 	@Size(min = 2, max = 20, message = "Enter a valid employee band")
 	private String employeeBand;
 }
-
-{
-	  "designation": "Software Engineer",
-	  "emailId": "sri@gmail.com",
-	  "employeeBand": "E1",
-	  "firstName": "Sri",
-	  "lastName": "Keerthna",
-	  "mobileNumber": 9458345783
-	}

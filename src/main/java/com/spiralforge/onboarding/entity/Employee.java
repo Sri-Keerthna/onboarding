@@ -28,6 +28,7 @@ public class Employee {
 	private String designation;
 	private String employeeBand;
 	private LocalDate dateOfJoining;
+	private String password;
 	
 	@OneToOne
 	@JoinColumn(name = "salary_id")

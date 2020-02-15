@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class LoginResponseDto {
 	private String message;
-	private Long adminId;
-	private String adminName;
+	private Long sapId;
+	private String name;
+	private String role;
 	private Integer statusCode;
 }

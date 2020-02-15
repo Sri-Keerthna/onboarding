@@ -23,7 +23,7 @@ import com.spiralforge.onboarding.dto.EmployeeList;
 import com.spiralforge.onboarding.dto.EmployeeListResponseDto;
 import com.spiralforge.onboarding.dto.LoginRequestDto;
 import com.spiralforge.onboarding.dto.LoginResponseDto;
-import com.spiralforge.onboarding.exception.AdminNotFoundException;
+import com.spiralforge.onboarding.exception.DetailsNotFoundException;
 import com.spiralforge.onboarding.exception.EmployeeListException;
 import com.spiralforge.onboarding.service.AdminService;
 
@@ -49,12 +49,12 @@ public class AdminController {
 	 *                        parameters
 	 * @return LoginResponseDto which has name,id,message and status code as a
 	 *         response
-	 * @throws AdminNotFoundException is called when the entered credentials is
+	 * @throws DetailsNotFoundException is called when the entered credentials is
 	 *                                invalid
 	 */
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponseDto> checkLogin(@Valid @RequestBody LoginRequestDto loginRequestDto)
-			throws AdminNotFoundException {
+			throws DetailsNotFoundException {
 		logger.info("For checking whether the person is staff or a customer");
 		LoginResponseDto loginResponse = adminService.checkLogin(loginRequestDto);
 		logger.info(ApiConstant.LOGIN_SUCCESS);

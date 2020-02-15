@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
 		return new ExceptionResponseDto(ApiConstant.INTERNAL_SERVER_ERROR, defaultMessage);
 	}
 
-	@ExceptionHandler(AdminNotFoundException.class)
+	@ExceptionHandler(DetailsNotFoundException.class)
 	public ResponseEntity<ErrorDto> adminNotFoundException() {
 		ErrorDto errorDto = new ErrorDto();
 		errorDto.setMessage(ApiConstant.ADMIN_NOTFOUND_MESSAGE);

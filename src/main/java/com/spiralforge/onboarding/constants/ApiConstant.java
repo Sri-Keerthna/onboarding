@@ -26,7 +26,7 @@ public class ApiConstant {
 	public static final String REGISTERED_SUCCESS = "Registered Successfully";
 	public static final String EMPLOYEE_NOTFOUND_MESSAGE = "No employee found";
 	public static final String UPDATED_MESSAGE = "Successfully updated";
-
+	public static final String DETAILS_NOT_FOUND="Please check the details entered";
 	public static final String LIST_SUCCESS_MESSAGE = "The list of employees with status pending is displayed";
 	public static final String LIST_EMPTY_MESSAGE = "There are no employees currently with status pending";
 	public static final String EMPTY_CUSTOMERINPUT_MESSAGE = "Field can't be left blank";

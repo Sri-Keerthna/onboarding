@@ -1,6 +1,6 @@
 package com.spiralforge.onboarding.exception;
 
-public class AdminNotFoundException extends Exception {
+public class DetailsNotFoundException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
@@ -10,7 +10,7 @@ public class AdminNotFoundException extends Exception {
 	 * 
 	 * @param message if validation failed the message will be thrown.
 	 */
-	public AdminNotFoundException(String message) {
+	public DetailsNotFoundException(String message) {
 		super(message);
 	}
 

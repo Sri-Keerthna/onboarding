@@ -21,4 +21,5 @@ public class EmployeeRequestDto {
 	private String designation;
 	@Size(min = 2, max = 20, message = "Enter a valid employee band")
 	private String employeeBand;
+	private String password;
 }

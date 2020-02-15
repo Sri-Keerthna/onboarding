@@ -23,7 +23,7 @@ import com.spiralforge.onboarding.repository.EmployeeRepository;
 import com.spiralforge.onboarding.repository.SalaryRepository;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
 
 	/**
 	 * The Constant log.
@@ -32,15 +32,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	SalaryRepository salaryRepository;
 
 	@Override
-	public EmployeeResponseDto addEmployee(@Valid EmployeeRequestDto employeeRequestDto) throws DesignationNotFoundException {
+	public EmployeeResponseDto addEmployee(@Valid EmployeeRequestDto employeeRequestDto)
+			throws DesignationNotFoundException {
 		EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
 		Optional<Salary> salary = salaryRepository.findByDesignation(employeeRequestDto.getDesignation());
-		if(!salary.isPresent()) {
+		if (!salary.isPresent()) {
 			throw new DesignationNotFoundException(ApplicationConstants.DESIGNATION_NOT_FOUND_EXCEPTION);
 		}
 		Employee employee = new Employee();
@@ -53,6 +54,5 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employeeResponseDto.setStatusCode(ApiConstant.SUCCESS_CODE);
 		return employeeResponseDto;
 	}
-	
-	
+
 }

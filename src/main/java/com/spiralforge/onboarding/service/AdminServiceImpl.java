@@ -20,7 +20,7 @@ import com.spiralforge.onboarding.dto.LoginRequestDto;
 import com.spiralforge.onboarding.dto.LoginResponseDto;
 import com.spiralforge.onboarding.entity.Admin;
 import com.spiralforge.onboarding.entity.Employee;
-import com.spiralforge.onboarding.exception.AdminNotFoundException;
+import com.spiralforge.onboarding.exception.DetailsNotFoundException;
 import com.spiralforge.onboarding.exception.EmployeeListException;
 import com.spiralforge.onboarding.repository.AdminRepository;
 import com.spiralforge.onboarding.repository.EmployeeRepository;
@@ -48,19 +48,31 @@ public class AdminServiceImpl implements AdminService {
 	 *                        parameters
 	 * @return LoginResponseDto which has name,id,message and status code as a
 	 *         response
-	 * @throws AdminNotFoundException is called when the entered credentials is
-	 *                                invalid
+	 * @throws DetailsNotFoundException is called when the entered credentials is
+	 *                                  invalid
 	 */
 	@Override
-	public LoginResponseDto checkLogin(@Valid LoginRequestDto loginRequestDto) throws AdminNotFoundException {
+	public LoginResponseDto checkLogin(@Valid LoginRequestDto loginRequestDto) throws DetailsNotFoundException {
 		logger.info("For checking whether the credentials are valid or not");
 		Admin admin = adminRepository.findByMobileNumberAndPassword(loginRequestDto.getMobileNumber(),
 				loginRequestDto.getPassword());
-		if (Objects.isNull(admin)) {
-			logger.error(ApiConstant.ADMIN_NOTFOUND_MESSAGE);
-			throw new AdminNotFoundException(ApiConstant.ADMIN_NOTFOUND_MESSAGE);
+		Employee employee = employeeRepository.findByMobileNumberAndPassword(loginRequestDto.getMobileNumber(),
+				loginRequestDto.getPassword());
+		if (Objects.isNull(admin) && Objects.isNull(employee)) {
+			logger.error(ApiConstant.DETAILS_NOT_FOUND);
+			throw new DetailsNotFoundException(ApiConstant.DETAILS_NOT_FOUND);
+		} else if (Objects.isNull(admin)) {
+			LoginResponseDto loginResponseDto = new LoginResponseDto();
+			loginResponseDto.setRole("Employee");
+			loginResponseDto.setName(employee.getFirstName() + " " + employee.getLastName());
+			loginResponseDto.setSapId(employee.getSapId());
+			logger.info("Employee details are being set as a response");
+			return loginResponseDto;
 		}
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
+		loginResponseDto.setRole("Admin");
+		loginResponseDto.setName(admin.getAdminName());
+		loginResponseDto.setSapId(admin.getAdminId());
 		BeanUtils.copyProperties(admin, loginResponseDto);
 		logger.info("Admin details are being set as a response");
 		return loginResponseDto;

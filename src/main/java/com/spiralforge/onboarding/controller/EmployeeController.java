@@ -30,10 +30,11 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
+
 	@PostMapping
-	public ResponseEntity<EmployeeResponseDto> addEmployee(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) throws DesignationNotFoundException{
-		EmployeeResponseDto employeeResponseDto=employeeService.addEmployee(employeeRequestDto);
-		return new ResponseEntity<> (employeeResponseDto, HttpStatus.OK);
+	public ResponseEntity<EmployeeResponseDto> addEmployee(@Valid @RequestBody EmployeeRequestDto employeeRequestDto)
+			throws DesignationNotFoundException {
+		EmployeeResponseDto employeeResponseDto = employeeService.addEmployee(employeeRequestDto);
+		return new ResponseEntity<>(employeeResponseDto, HttpStatus.OK);
 	}
 }

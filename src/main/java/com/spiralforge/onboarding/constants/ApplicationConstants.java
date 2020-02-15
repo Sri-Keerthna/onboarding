@@ -1,5 +1,7 @@
 package com.spiralforge.onboarding.constants;
 
+import javax.jms.Destination;
+
 public class ApplicationConstants {
 	private ApplicationConstants() {
 
@@ -15,4 +17,5 @@ public class ApplicationConstants {
 	public static final String FAILED_STATUS = "FAILED";
 	public static final String PENDING_STATUS = "PENDING";
 	public static final String DESIGNATION_NOT_FOUND_EXCEPTION = "Designation not found";
+	public static final String EMPLOYEE_ONBOARDED = "EMPLOYEE_ONBOARDED";
 }

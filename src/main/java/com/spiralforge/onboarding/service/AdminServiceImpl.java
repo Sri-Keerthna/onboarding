@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import com.spiralforge.onboarding.constants.ApiConstant;
@@ -18,12 +19,14 @@ import com.spiralforge.onboarding.constants.ApplicationConstants;
 import com.spiralforge.onboarding.dto.EmployeeList;
 import com.spiralforge.onboarding.dto.LoginRequestDto;
 import com.spiralforge.onboarding.dto.LoginResponseDto;
+import com.spiralforge.onboarding.dto.UserDto;
 import com.spiralforge.onboarding.entity.Admin;
 import com.spiralforge.onboarding.entity.Employee;
 import com.spiralforge.onboarding.exception.DetailsNotFoundException;
 import com.spiralforge.onboarding.exception.EmployeeListException;
 import com.spiralforge.onboarding.repository.AdminRepository;
 import com.spiralforge.onboarding.repository.EmployeeRepository;
+import com.spiralforge.onboarding.repository.SalaryRepository;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -38,6 +41,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private SalaryRepository salaryRepository;
+
+
+	@Autowired
+	private JmsTemplate jmsTemplate;
 
 	/**
 	 * @author Muthu
@@ -125,6 +135,28 @@ public class AdminServiceImpl implements AdminService {
 		}
 		employee.get().setEmployeeStatus(ApplicationConstants.SUCCESS_STATUS);
 		employeeRepository.save(employee.get());
+		publishNewEmployee(employee);
 		return ApiConstant.UPDATED_MESSAGE;
+	}
+
+
+	/**
+	 * @author Sujal
+	 * 
+	 *         Method is used to publish a particular employee onboarded
+	 * 
+	 * @param Optional<Employee> the employee data
+=	 */
+	public void publishNewEmployee(Optional<Employee> employee) {
+
+		logger.info("publishing the message");
+		if (employee.isPresent()) {
+			UserDto userDto = new UserDto();
+			userDto.setSapId(employee.get().getSapId());
+			userDto.setFullName(employee.get().getFirstName() +" "+ employee.get().getLastName());
+			userDto.setSalary(employee.get().getSalary().getSalary());
+			jmsTemplate.convertAndSend(ApplicationConstants.EMPLOYEE_ONBOARDED, userDto);
+
+		}
 	}
 }
